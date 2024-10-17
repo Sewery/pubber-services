@@ -1,0 +1,13 @@
+springdoc:
+  swagger-ui:
+    path: /client/
+geoapify:
+  api:
+    key: 7986f1f122854b86893c80c6cb77720d
+server:
+  port: 8444
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+

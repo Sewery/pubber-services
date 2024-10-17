@@ -1,0 +1,12 @@
+eureka:
+  instance:
+    hostname: discovery
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka
+name:
+  value: pubber
+management:
+  tracing:
+    sampling:
+      probability: 1.0

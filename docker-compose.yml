@@ -1,0 +1,114 @@
+
+services:
+  db-pubs:
+    container_name: db-pubs
+    hostname: db-pubs
+    image: mysql
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: 12345
+    ports:
+      - 5432:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - basic-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - basic-net
+    command: --logging.level.zipkin2=DEBUG
+  config:
+    container_name: config
+    build: ./services/config-server
+    hostname: config
+    ports:
+      - "8888:8888"
+    networks:
+      - basic-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://config:8888/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  discovery:
+    container_name: discovery
+    build: ./services/discovery
+    ports:
+      - "8761:8761"
+    networks:
+      - basic-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://discovery:8761/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      config:
+        condition: service_healthy
+  pubs-data:
+    container_name: pubs-data
+    build: ./services/pubs-data-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8543:8543
+    networks:
+      - basic-net
+    links:
+      - zipkin
+    depends_on:
+      config:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+      db-pubs:
+        condition: service_healthy
+
+  pubs-routes:
+    container_name: pubs-routes
+    build: ./services/pubs-routes-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8444:8444
+    networks:
+      - basic-net
+    links:
+      - zipkin
+    depends_on:
+      config:
+        condition: service_healthy
+      discovery:
+        condition: service_healthy
+  gateway:
+    container_name: gateway
+    build: ./services/gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8322:8322
+    networks:
+      - basic-net
+    depends_on:
+      config:
+        condition: service_healthy
+      discovery:
+        condition: service_started
+      pubs-data:
+        condition: service_started
+networks:
+  basic-net:
+    driver: bridge
+volumes:
+  mysql:

@@ -1,0 +1,9 @@
+We want to create mobile app that makes easier for people to search for pubs in nearby.
+
+Customer needs to know the closest pubs in his location, reviews from the most known websites such as: Google, TripAdvisor
+Facebook. Every pubs needs to have some pictures, description and alcohols which are avaliable.
+Also for customers can post your comments  and give rating under a pub.
+Customers have accounts. That ones who subscribe have premium one have benefits such as faster refreshers of location changes
+and some perks in comments.4
+Upon the completion of a successful payment transaction, I take the responsibility to inform the customer via an email, confirming
+the success of their payment or conversely, notifying them of any payment failures.

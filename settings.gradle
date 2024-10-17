@@ -1,0 +1,7 @@
+rootProject.name = 'pubber-service'
+
+include 'services:config-server'
+include 'services:pubs-data-service'
+include 'services:discovery'
+include 'services:pubs-routes-service'
+include 'services:gateway'
