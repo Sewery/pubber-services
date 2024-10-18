@@ -2,6 +2,7 @@
 FROM gradle:jdk21-alpine AS builder
 LABEL authors="Seweryn"
 WORKDIR /builder
+RUN chmod +x ./gradlew
 COPY --chown=gradle:gradle . /builder
 RUN ./gradlew clean build --no-daemon  -x test
 
