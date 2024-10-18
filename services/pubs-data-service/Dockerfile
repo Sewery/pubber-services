@@ -4,7 +4,7 @@ LABEL authors="Seweryn"
 WORKDIR /builder
 COPY --chown=gradle:gradle . /builder
 RUN chmod +x ./gradlew
-RUN ./gradlew clean build --no-daemon --debug -x test
+RUN ./gradlew clean build --debug -x test
 
 #Runtime stage
 FROM amazoncorretto:21 AS final
