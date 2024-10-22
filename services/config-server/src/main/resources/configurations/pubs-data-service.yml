@@ -15,7 +15,7 @@ spring:
           allow_jdbc_metadata_access: false
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     database: mysql
     show-sql: true
 springdoc:
