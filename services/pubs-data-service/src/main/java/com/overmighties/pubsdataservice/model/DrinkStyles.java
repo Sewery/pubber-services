@@ -1,6 +1,7 @@
 package com.overmighties.pubsdataservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,10 @@ import java.util.List;
 public class DrinkStyles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_drink_style",nullable = false)
+    @Column(name = "id_drink_style", nullable = false)
     private Long id;
-    @Column(name="style_name")
+    @NotNull
+    @Column(name = "style_name")
     private String styleName;
     @ManyToMany(mappedBy = "drinkStyles", fetch = FetchType.EAGER)
     private List<Drink> drinks;

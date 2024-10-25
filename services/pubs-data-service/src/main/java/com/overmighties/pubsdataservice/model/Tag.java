@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_tag",nullable = false)
+    @Column(name = "id_tag", nullable = false)
     private Long id;
     @NotNull
     private String name;
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="id_pub")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pub")
     @JsonBackReference
     private Pub pub;
 }
