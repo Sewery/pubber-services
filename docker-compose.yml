@@ -1,25 +1,5 @@
 
 services:
-  db-pubs:
-    container_name: db-pubs
-    hostname: db-pubs
-    image: mysql
-    environment:
-      MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: 12345
-    ports:
-      - 5432:3306
-    volumes:
-      - mysql:/var/lib/mysql
-    networks:
-      - basic-net
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
   zipkin:
     container_name: zipkin
     image: openzipkin/zipkin
@@ -32,6 +12,13 @@ services:
     container_name: config
     build: ./services/config-server
     hostname: config
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      API_KEY: ${GEOAPIFY_API_KEY}
     ports:
       - "8888:8888"
     networks:
@@ -59,27 +46,30 @@ services:
   pubs-data:
     container_name: pubs-data
     build: ./services/pubs-data-service
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
     ports:
       - 8543:8543
     networks:
       - basic-net
     links:
       - zipkin
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      API_KEY: ${GEOAPIFY_API_KEY}
     depends_on:
       config:
         condition: service_healthy
       discovery:
-        condition: service_healthy
-      db-pubs:
         condition: service_healthy
 
   pubs-routes:
     container_name: pubs-routes
     build: ./services/pubs-routes-service
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      SPRING_PROFILES_ACTIVE: prod
     ports:
       - 8444:8444
     networks:
@@ -95,7 +85,7 @@ services:
     container_name: gateway
     build: ./services/gateway
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      SPRING_PROFILES_ACTIVE: prod
     ports:
       - 8322:8322
     networks:
@@ -110,5 +100,3 @@ services:
 networks:
   basic-net:
     driver: bridge
-volumes:
-  mysql:
