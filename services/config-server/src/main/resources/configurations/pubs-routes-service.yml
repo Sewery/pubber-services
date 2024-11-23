@@ -3,7 +3,7 @@ springdoc:
     path: /client/
 geoapify:
   api:
-    key: ${API_KEY}
+    key: ${GEOAPIFY_API_KEY}
 server:
   port: 8444
 management:

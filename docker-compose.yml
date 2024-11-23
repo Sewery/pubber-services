@@ -18,7 +18,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: ${DB_PORT}
       DB_USERNAME: ${DB_USERNAME}
-      API_KEY: ${GEOAPIFY_API_KEY}
+      GEOAPIFY_API_KEY: ${GEOAPIFY_API_KEY}
     ports:
       - "8888:8888"
     networks:
@@ -58,7 +58,6 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: ${DB_PORT}
       DB_USERNAME: ${DB_USERNAME}
-      API_KEY: ${GEOAPIFY_API_KEY}
     depends_on:
       config:
         condition: service_healthy
@@ -70,6 +69,7 @@ services:
     build: ./services/pubs-routes-service
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      GEOAPIFY_API_KEY: ${GEOAPIFY_API_KEY}
     ports:
       - 8444:8444
     networks:

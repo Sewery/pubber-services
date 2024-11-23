@@ -14,14 +14,14 @@ INSERT INTO drink (id_drink, drink_name, type, drink_description) VALUES
                                                     (4, 'Czech Pilsner', 'Beer', 'A classic Czech-style pilsner.'),
                                                     (5, 'Hazy IPA', 'Beer', 'A hazy IPA with tropical fruit flavors.');
 -- Insert into Ratings
-INSERT INTO ratings (id_rating, our_service_quality,our_cost) VALUES
+INSERT INTO Ratings (id_rating, our_service_quality,our_cost) VALUES
                                                                  (1, 4.5, 1 ),
                                                                  (2, 4.0,  2),
                                                                  (3, 5.0,  3),
                                                                  (4, 3.5, 4),
                                                                  (5, 4.8, 5);
 -- Insert into Pubs (with embedded Geolocation)
-INSERT INTO pub (id_pub, pub_name, latitude, longitude, address,city, phone_number,id_rating) VALUES
+INSERT INTO Pub (id_pub, pub_name, latitude, longitude, address,city, phone_number,id_rating) VALUES
                                                                      (1, 'The London Pub', 51.5074, -0.1278, '123 London St, London, UK', 'London','+44 20 7946 0958',2),
                                                                      (2, 'Le Parisien', 48.8566, 2.3522, '456 Rue de Paris, Paris, France','London', '+33 1 42 68 53 00',1),
                                                                      (3, 'The New Yorker', 40.7128, -74.0060, '789 Broadway, New York, USA','London', '+1 212-555-0190',3),
@@ -29,7 +29,7 @@ INSERT INTO pub (id_pub, pub_name, latitude, longitude, address,city, phone_numb
                                                                      (5, 'Tokyo Taproom', 35.6895, 139.6917, '202 Shibuya, Tokyo, Japan', 'London','+81 3-1234-5678',5);
 
 -- Insert into OpeningHours
-INSERT INTO opening_hours (id_opening_hours, id_pub, weekday, time_open, time_close) VALUES
+INSERT INTO Opening_hours (id_opening_hours, id_pub, weekday, time_open, time_close) VALUES
                                                                                          (1, 1, 'Monday', '12:00', '23:00'),
                                                                                          (2, 1, 'Tuesday', '12:00', '23:00'),
                                                                                          (3, 1, 'Wednesday', '12:00', '23:00'),
@@ -40,7 +40,7 @@ INSERT INTO opening_hours (id_opening_hours, id_pub, weekday, time_open, time_cl
                                                                                          (8, 4, 'Monday', '14:00', '22:00'),
                                                                                          (9, 5, 'Monday', '16:00', '23:30');
 -- Insert into Photos
-INSERT INTO photo (id_add_photo, id_pub, photo_url, title) VALUES
+INSERT INTO Photo (id_add_photo, id_pub, photo_url, title) VALUES
                                                       (1, 1, 'https://example.com/photos/london_pub.jpg', 'The front of the London Pub'),
                                                       (2, 2, 'https://example.com/photos/paris_pub.jpg', 'Inside Le Parisien'),
                                                       (3, 3, 'https://example.com/photos/ny_pub.jpg', 'The New Yorker pub exterior'),
