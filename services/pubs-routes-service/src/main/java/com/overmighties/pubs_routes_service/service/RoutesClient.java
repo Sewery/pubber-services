@@ -35,7 +35,6 @@ public class RoutesClient {
                 List.of(userLocationRequest),
                 destinations
         );
-        log.info(routesRequest.toString());
         return webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("apiKey", GEOAPIFY_API_KEY)

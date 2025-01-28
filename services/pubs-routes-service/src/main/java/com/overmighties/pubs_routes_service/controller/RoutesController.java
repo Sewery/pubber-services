@@ -26,9 +26,7 @@ public class RoutesController {
         Mono<RoutesClientResponse> response = routesService.getRoutes(request,request.getDestinationLocations());
         return response
                 .map(data ->{
-                    log.info(data.toString());
                     return ResponseEntity.ok().body(data);
-
                 });
     }
 }

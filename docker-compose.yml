@@ -13,11 +13,11 @@ services:
     build: ./services/config-server
     hostname: config
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_NAME: ${DB_NAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
+      DB_HOST: ${PUBBER_DB_HOST}
+      DB_NAME: ${PUBBER_DB_NAME}
+      DB_PASSWORD: ${PUBBER_DB_PASSWORD}
+      DB_PORT: ${PUBBER_DB_PORT}
+      DB_USERNAME: ${PUBBER_DB_USERNAME}
       GEOAPIFY_API_KEY: ${GEOAPIFY_API_KEY}
     ports:
       - "8888:8888"
@@ -53,11 +53,11 @@ services:
     links:
       - zipkin
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_NAME: ${DB_NAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
+      DB_HOST: ${PUBBER_DB_HOST}
+      DB_NAME: ${PUBBER_DB_NAME}
+      DB_PASSWORD: ${PUBBER_DB_PASSWORD}
+      DB_PORT: ${PUBBER_DB_PORT}
+      DB_USERNAME: ${PUBBER_DB_USERNAME}
     depends_on:
       config:
         condition: service_healthy

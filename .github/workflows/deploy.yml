@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up SSH connection
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
@@ -41,9 +41,9 @@ jobs:
           docker-compose pull
           docker-compose up -d
         env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          PUBBER_DB_HOST: ${{ secrets.PUBBER_DB_HOST }}
+          PUBBER_DB_NAME: ${{ secrets.PUBBER_DB_NAME }}
+          PUBBER_DB_PASSWORD: ${{ secrets.PUBBER_DB_PASSWORD }}
+          PUBBER_DB_PORT: ${{ secrets.PUBBER_DB_PORT }}
+          PUBBER_DB_USERNAME: ${{ secrets.PUBBER_DB_USERNAME }}
           GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
