@@ -3,7 +3,8 @@ FROM gradle:jdk21-alpine AS builder
 LABEL authors="Seweryn"
 WORKDIR /builder
 COPY --chown=gradle:gradle . /builder
-RUN ./gradlew clean build --no-daemon  -x test
+RUN chmod +x ./gradlew
+RUN ./gradlew clean build -x test
 
 #Runtime stage
 FROM amazoncorretto:21 AS final

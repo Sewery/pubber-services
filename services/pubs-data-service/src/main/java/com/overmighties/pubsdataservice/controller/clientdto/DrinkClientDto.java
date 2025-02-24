@@ -5,8 +5,6 @@ import lombok.Builder;
 
 import lombok.Getter;
 
-import jakarta.validation.constraints.NotBlank;
-
 import java.util.List;
 
 @Builder
@@ -17,4 +15,5 @@ public class DrinkClientDto {
     private String type;
     private String description;
     private List<DrinkStylesClientDto> drinkStyles;
+    private BeerClientDto beer;
 }
