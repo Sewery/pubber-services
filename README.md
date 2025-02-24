@@ -10,6 +10,6 @@ Pubber Services consists of following services:
 For monitoring, Zipkin is used, while Eureka Server handles service discovery.
 ## Deployment
 Application is deployed on EC2 server using GitHub Workflows
-##Local development
+## Local development
 It is made for local deployment using docker compose, to run it everywhere.
 
